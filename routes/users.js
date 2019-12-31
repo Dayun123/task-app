@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../src/models/user');
 const validateContentType = require('../src/middleware/validateContentType');
+const auth = require('../src/middleware/auth');
 
 const router = express.Router();
 
@@ -13,8 +14,8 @@ router.post('/', validateContentType, async (req, res, next) => {
   }
 });
 
-router.get('/', (req, res, next) => {
-  res.status(200).json({ auth: req.get('Authorization')});
+router.get('/', auth, (req, res, next) => {
+  res.status(200).json(res.locals.user.profile);
 });
 
 router.use((err, req, res, next) => {
