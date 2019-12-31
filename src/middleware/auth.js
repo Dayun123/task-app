@@ -1,12 +1,18 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const loadConfig = require('../utils/loadConfig');
+const ResponeError = require('../utils/responseError');
 
 module.exports = async (req, res, next) => {
-  const config = await loadConfig();
-  const token = req.get('Authorization').replace('Bearer ', '');
-  const _id = jwt.verify(token, config.secret)._id;
-  const user = await User.findById(_id);
-  res.locals.user = user;
-  next();
+  try {
+    const config = await loadConfig();
+    if (!req.get('Authorization')) throw new ResponeError(401, 'Must include a valid JWT');
+    const token = req.get('Authorization').replace('Bearer ', '');
+    const _id = jwt.verify(token, config.secret)._id;
+    const user = await User.findById(_id);
+    res.locals.user = user;
+    next();
+  } catch (e) {
+    next(e);
+  }
 };
