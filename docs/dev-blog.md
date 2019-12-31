@@ -49,3 +49,34 @@ I did this with the last project, and now I can't live without testing. The Mead
 #### Error Handling
 
 I've been using error handling for all projects, and in this one I hope to get a little better about encapsulating common error-handling logic in route or app level error handling middleware instead of having error responses being thrown from each individual route. I'm still not going to be super thorough here, but I do want to always focus on handling some common issues even in these 'toy' apps.
+
+#### User Creation
+
+A general pattern I seem to be following for creating a new user is to setup a static User.create method which looks something like the following:
+
+```javascript
+
+userSchema.statics.create = async function(newUser) {
+  const user = new this(newUser);
+  user.password = await bcrypt.hash(user.password, 8);
+  user.generateAuthToken();
+  await user.save();
+  return user;
+};
+
+```
+
+That seems to take care of the basic functions associated with user creation. Namely, creating the user model, hashing the password, setting JWT, and saving the user to the db. 
+
+Then, in the route-handler, I don't have to worry about any of that stuff, I simply return the user profile (a virtual property that returns only the paths I want made public):
+
+```javascript
+
+router.post('/', async (req, res, next) => {
+  const user = await User.create(req.body);
+  res.status(201).json({ user: user.profile });
+});
+
+```
+
+I like this pattern a lot. Of course, once error-handling is added, the code becomes a little muddier, but the basic separation of concerns, where the User model or class handles all User-related activities, and the route-handler simply deals with returning responses, is a nice one I think.
