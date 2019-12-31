@@ -187,3 +187,19 @@ module.exports = async (req, res, next) => {
 ```
 
 This is a little annoying. I don't like having to sniff the error message in the catch handler and then throw my own error from there, but I don't see a better way. I definitely don't want to nest try...catch calls within one another, or have multiple try...catches in a function. Error handling is tedious!
+
+#### Development Workflow
+
+I'm still refining how I approach developing a web app, but here is my current workflow:
+
+1. Decide on a route to implement
+2. Create a git branch for that route (such as get-users for GET /users)
+3. Create a Postman request for the route and any associated tests for a successful response.
+4. Run the Postman request, watch it fail.
+5. Create a route-handler for the request, send back a correct 'dummy' response.
+6. Implement any logic to create a real response
+(loop this part until through)
+  7. Create invalid Postman requests and associated tests
+  8. Setup error-handling to response correctly for each invalid request
+
+That whole workflow makes logical sense to me. I'm thinking of it as route-based development workflow. When I was working yesterday, starting from a clean app, I began with the POST /user route, to create a user. Once I got the Postman request hooked up and the express route-handler returning a dummy response, I had a bunch of work to do hooking up the database, creating a Mongoose Schema and Model for a User, deciding on how to struture error-handling, etc... So what begins with a simple desire to fill out a route can bounce around through many different paths to get the task completed, but at the end, what has been accomplished is simply implemting the route. I imagine I will keep this workflow even once the front-end is hooked up, it will just fit in wherever it goes logically in the process.
