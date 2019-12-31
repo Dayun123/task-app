@@ -160,3 +160,30 @@ module.exports = async (req, res, next) => {
 ```
 
 Then, in the route-handler itself, as long as there is no async code running, you don't need a try..catch. I'm going to always use this pattern in validation middleware going forward, even if the actual route-handler has to use try..catch logic.
+
+#### Handling Errors Thrown By Third-Party Methods
+
+I just ran into an issue where the `jwt.verify` method throws it's own error when the token and secret don't match up. Since I already had this wrapped in a try...catch with a few other operations that could possibly throw errors, I had to change the `e` argument in the catch() handler to be an instance of my `ResponseError` object before passing it to next(e):
+
+```javascript
+
+module.exports = async (req, res, next) => {
+  try {
+    const config = await loadConfig();
+    if (!req.get('Authorization')) throw new ResponseError(401, 'Must include a JWT in an Authorization header');
+    const token = req.get('Authorization').replace('Bearer ', '');
+    const _id = jwt.verify(token, config.secret)._id;
+    const user = await User.findById(_id);
+    res.locals.user = user;
+    next();
+  } catch (e) {
+    if (e.message.includes('invalid signature')) {
+      e = new ResponseError(401, 'Must include a valid JWT');
+    }
+    next(e);
+  }
+};
+
+```
+
+This is a little annoying. I don't like having to sniff the error message in the catch handler and then throw my own error from there, but I don't see a better way. I definitely don't want to nest try...catch calls within one another, or have multiple try...catches in a function. Error handling is tedious!
