@@ -132,3 +132,7 @@ I'm finding that validations are a pain, but neccessary. There is so much to tes
 #### Config Files
 
 When using JWT, in order to sign and verify the tokens you have to provide a secret. I've been just using the string 'secret' for simplicity, as I'm not focusing on security issues just yet, but it seemed easy enough to add an extra level of security by using a long, random string. Today, I had to use the secret in another file (auth.js), so I decided to create a config.json file to store the secret, then have a helper function loadConfig.js that will pull in the config file to expose the secret within the app. Once I get around to creating the install script for the app, I will include the generation of a secret and the config.json file in that script as part of the inintial app setup. Eventually, I will be using environment variables for this stuff, but I haven't learned that yet. The best I can do right now is add the config.json to the .gitignore so that it doesn't get committed to version control.
+
+#### Storing Authenticated User
+
+In the Mead app, we stored the authenticated user on `req.user`. While there is no problem with that approach, I'm going to store the user at `res.locals.user` so the user object will be available to views. Even though this project is not using a front-end, it seems logical to have it setup for integration at a later time with views.
