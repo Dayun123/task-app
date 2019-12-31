@@ -15,9 +15,9 @@ I'm working through the following concepts in this project:
 - File uploads
 - Postman Tests
 
-I will be blogging as I work through creating this app and committing the file to the repo. It can be viewed at Dev Blog.
+I will be blogging as I work through creating this app and committing the file to the repo. It can be viewed at [Dev Blog](https://github.com/Dayun123/task-app/blob/master/docs/dev-blog.md).
 
-In addition to the dev blog, I have a document that will track my TODO's for the project at TODO.
+In addition to the dev blog, I have a document that will track my TODO's for the project at [TODO](https://github.com/Dayun123/task-app/blob/master/docs/TODO.md).
 
 ## Caveats
 
