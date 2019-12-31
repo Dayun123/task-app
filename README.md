@@ -12,8 +12,9 @@ I'm working through the following concepts in this project:
 - User authentication
 - Modeling data with Mongoose
 - Basic search functionality
-- File uploads
-- Postman Tests
+- Handling file uploads q
+- Testing routes with Postman
+- Error handling
 
 I will be blogging as I work through creating this app and committing the file to the repo. It can be viewed at [Dev Blog](https://github.com/Dayun123/task-app/blob/master/docs/dev-blog.md).
 
