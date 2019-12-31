@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   email: String,
+  authToken: String,
+  authTokens: [String],
 });
 
 userSchema.statics.create = async function(newUser) {
