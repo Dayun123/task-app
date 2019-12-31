@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
     const token = req.get('Authorization').replace('Bearer ', '');
     const _id = jwt.verify(token, config.secret)._id;
     const user = await User.findById(_id);
+    if (!user) throw new ResponseError(404, 'User not found');
     res.locals.user = user;
     next();
   } catch (e) {
