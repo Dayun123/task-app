@@ -14,6 +14,7 @@ router.post('/', validateContentType, async (req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
+  if (isNaN(err.status)) return res.status(500).json(err.message);
   res.status(err.status).json({ msg: err.message });
 });
 
