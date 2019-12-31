@@ -80,13 +80,19 @@ Accepts requests at the following routes:
 
 #### User Routes
 
-|  Method | Path         | Description   |
-| --------| ------       | --------------|
-| GET     | /user        | Return user   |
-| POST    | /user        | Create user   |
-| POST    | /user/avatar | Upload avatar |
-| PATCH   | /user        | Update user   |
-| DELETE  | /user        | Delete user   |
+|  Method | Path  | Description   |
+| --------| ------| --------------|
+| GET     | /user | Return user   |
+| POST    | /user | Create user   |
+| PATCH   | /user | Update user   |
+| DELETE  | /user | Delete user   |
+
+#### Avatar Routes
+
+|  Method | Path             | Description   |
+| --------| -----------------| --------------|
+| POST    | /user/avatar     | Upload avatar |
+| GET     | /user/:id/avatar | Return avatar |
 
 #### Login/Logout Routes
 
