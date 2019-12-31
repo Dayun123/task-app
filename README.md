@@ -63,13 +63,7 @@ The app comes bundled with a file at `tests/task-app.postman_collection.json` th
 
 ## Authorization
 
-JWT authentication is used to ensure that `users` only have access to their own account. The only routes that do not require authentication are the routes to create a user and login a user. The JWT is expected to appear in an `Authorization` header with the format:
-
-```
-
-Authorization: Bearer <token>
-
-```
+JWT authentication is used to ensure that `users` only have access to their own account. The only routes that do not require authentication are the routes to create a user and login a user. The JWT is expected to appear in an `Authorization` header with the format: `Authorization: Bearer <token>`
 
 ## Routes
 
