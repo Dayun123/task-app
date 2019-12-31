@@ -61,7 +61,7 @@ The app comes bundled with a file at `tests/task-app.postman_collection.json` th
 
 ## Authorization
 
-JWT authentication is used to ensure that `users` only have access to their own account. The only routes not behind an authentication firewall are the routes to create a user and login.
+JWT authentication is used to ensure that `users` only have access to their own account. The only routes not behind an authentication firewall are the routes to create a user, get a user's avatar, and login a user.
 
 ## Routes
 
