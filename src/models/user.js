@@ -5,7 +5,11 @@ const jwt = require('jsonwebtoken');
 const secret = 'dq6h/K_NT5@6N`CcJa$<db/W)/awTc';
 
 const userSchema = new mongoose.Schema({
-  username: String,
+  username: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   password: String,
   email: String,
   authToken: String,
