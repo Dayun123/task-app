@@ -19,4 +19,12 @@ taskSchema.statics.create = async function(newTask, owner) {
   return task;
 };
 
+taskSchema.virtual('profile').get(function() {
+  return {
+    _id: this._id,
+    description: this.description,
+    completed: this.completed,
+  };
+});
+
 module.exports = mongoose.model('Task', taskSchema);
