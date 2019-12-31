@@ -21,6 +21,7 @@ userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
   user.generateAuthToken();
   try {
+    if (!user.password) throw new Error('User validation failed: password: Path `password` is required.');
     user.password = await bcrypt.hash(user.password, 8);
     await user.save();
   } catch (e) {
