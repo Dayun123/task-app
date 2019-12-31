@@ -14,7 +14,8 @@ router.post('/', auth, async (req, res, next) => {
   }
 });
 
-router.get('/', auth, (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
+  
   res.status(200).json([]);
 });
 
