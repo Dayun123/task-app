@@ -4,8 +4,16 @@ const User = require('../src/models/user');
 const router = express.Router();
 
 router.post('/', async (req, res, next) => {
-  const user = await User.create(req.body);
-  res.status(201).json(user.profile);
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json(user.profile);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.use((err, req, res, next) => {
+  res.status(500).json({ msg: err.message });
 });
 
 module.exports = router;
