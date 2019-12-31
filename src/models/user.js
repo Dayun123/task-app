@@ -31,9 +31,9 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
-  user.generateAuthToken();
   try {
-    if (!user.password) throw new Error('User validation failed: password: Path `password` is required.');
+    await user.validate();
+    user.generateAuthToken();
     user.password = await bcrypt.hash(user.password, 8);
     await user.save();
   } catch (e) {
