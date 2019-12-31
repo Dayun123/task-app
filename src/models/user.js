@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -6,8 +7,9 @@ const userSchema = new mongoose.Schema({
   email: String,
 });
 
-userSchema.statics.create = function(newUser) {
+userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
+
   return user;
 };
 
