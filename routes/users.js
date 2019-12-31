@@ -4,7 +4,8 @@ const User = require('../src/models/user');
 const router = express.Router();
 
 router.post('/', (req, res, next) => {
-  res.status(201).json({ user: new User(req.body) });
+  const user = User.create(req.body);
+  res.status(201).json({ user });
 });
 
 module.exports = router;

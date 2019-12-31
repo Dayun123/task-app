@@ -6,4 +6,9 @@ const userSchema = new mongoose.Schema({
   email: String,
 });
 
+userSchema.statics.create = function(newUser) {
+  const user = new this(newUser);
+  return user;
+};
+
 module.exports = mongoose.model('User', userSchema);
