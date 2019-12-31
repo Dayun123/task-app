@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const ResponseError = require('../utils/responseError');
-
-const secret = 'dq6h/K_NT5@6N`CcJa$<db/W)/awTc';
+const loadConfig = require('../utils/loadConfig');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -35,7 +34,7 @@ userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
   try {
     await user.validate();
-    user.generateAuthToken();
+    await user.generateAuthToken();
     user.password = await bcrypt.hash(user.password, 8);
     await user.save();
   } catch (e) {
@@ -44,8 +43,9 @@ userSchema.statics.create = async function(newUser) {
   return user;
 };
 
-userSchema.methods.generateAuthToken = function() {
-  this.authToken = jwt.sign({ _id: this._id }, secret);
+userSchema.methods.generateAuthToken = async function() {
+  const config = await loadConfig();
+  this.authToken = jwt.sign({ _id: this._id }, config.secret);
   this.authTokens.push(this.authToken);
 };
 
