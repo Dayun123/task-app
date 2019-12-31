@@ -14,7 +14,7 @@ router.post('/', validateContentType, async (req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-  res.status(500).json({ msg: err.message });
+  res.status(err.status).json({ msg: err.message });
 });
 
 module.exports = router;
