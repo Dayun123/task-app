@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 const ResponseError = require('../utils/responseError');
 
 const secret = 'dq6h/K_NT5@6N`CcJa$<db/W)/awTc';
@@ -20,6 +21,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
+    validate(email) {
+      return validator.isEmail(email);
+    },
   },
   authToken: String,
   authTokens: [String],
