@@ -105,9 +105,9 @@ Accepts requests at the following routes:
 | GET     | /logout    | Logout user                  |
 | GET     | /logoutAll | Logout user from all devices |
 
-## Search
+## Filtering and Pagination For Tasks
 
-Search functionality is provided to filter through tasks. To search for a task, the following queries are available at the route `GET /tasks`:
+There are some pagination and sorting helpers that can be included in a query string to filter and sort tasks. The following queries are available at the route `GET /tasks`:
 
 Pagination helpers:
 
