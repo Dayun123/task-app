@@ -168,7 +168,7 @@ While a successful request to `POST /user` would return:
 
 ### Failure
 
-Unsuccessful responses return a JSON object with `statusCode` and `statusMessage` properties detailing what went wrong.
+Unsuccessful responses return a JSON object with `statusCode` and `statusMessage` properties detailing what went wrong. The `statusMessage` property will be more descriptive than it should be in a real-world app, but this is just so I can practice handling errors and throwing good log messages. Eventually, I would just log a more descriptive message to a file and send a generic message to the client, but I don't want to hook up logging.
 
 Here is an example response for an authentication error:
 
