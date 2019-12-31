@@ -8,6 +8,6 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 module.exports = app;
