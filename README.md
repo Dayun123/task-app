@@ -95,7 +95,7 @@ Accepts requests at the following routes:
 |  Method | Path             | Description   |
 | --------| -----------------| --------------|
 | POST    | /user/avatar     | Upload avatar |
-| GET     | /user/:id/avatar | Return avatar |
+| GET     | /user/avatar | Return avatar |
 
 #### Login/Logout Routes
 
@@ -211,4 +211,4 @@ A request to create a resource should have the header `Content-Type: application
 
 ## Uploading An Avatar
 
-Users can upload an avatar at the route `POST /user/avatar`. The avatar should be an image file, it will be resized to 150/150px and converted to a png on submission. It can be accessed from the route `GET /user/:id/avatar`.
+Users can upload an avatar at the route `POST /user/avatar`. The avatar should be an image file, it will be resized to 150/150px and converted to a png on submission. It can be accessed from the route `GET /user/avatar`.
