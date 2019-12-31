@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ResponseError = require('../utils/responseError');
 
 const secret = 'dq6h/K_NT5@6N`CcJa$<db/W)/awTc';
 
@@ -18,9 +19,13 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
-  user.password = await bcrypt.hash(user.password, 8);
   user.generateAuthToken();
-  await user.save();
+  try {
+    user.password = await bcrypt.hash(user.password, 8);
+    await user.save();
+  } catch (e) {
+    throw new ResponseError(400, e.message);    
+  }
   return user;
 };
 
