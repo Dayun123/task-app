@@ -15,8 +15,8 @@ router.post('/', auth, async (req, res, next) => {
 });
 
 router.get('/', auth, async (req, res, next) => {
-  
-  res.status(200).json([]);
+  const tasks = await Task.find({ owner: res.locals.user._id });
+  res.status(200).json(tasks);
 });
 
 module.exports = router;
