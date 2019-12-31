@@ -136,3 +136,27 @@ When using JWT, in order to sign and verify the tokens you have to provide a sec
 #### Storing Authenticated User
 
 In the Mead app, we stored the authenticated user on `req.user`. While there is no problem with that approach, I'm going to store the user at `res.locals.user` so the user object will be available to views. Even though this project is not using a front-end, it seems logical to have it setup for integration at a later time with views.
+
+#### Using next(e) In Middleware
+
+In the auth middleware, I wanted to throw a ResponseError if something went wrong, and I thought it would be picked up by the router-level error-handling middleware. This is not the case, you have to wrap any error code in a try..catch then pass the error to next(e), like so:
+
+```javascript
+
+module.exports = async (req, res, next) => {
+  try {
+    const config = await loadConfig();
+    if (!req.get('Authorization')) throw new ResponeError(401, 'Must include a valid JWT');
+    const token = req.get('Authorization').replace('Bearer ', '');
+    const _id = jwt.verify(token, config.secret)._id;
+    const user = await User.findById(_id);
+    res.locals.user = user;
+    next();
+  } catch (e) {
+    next(e);
+  }
+};
+
+```
+
+Then, in the route-handler itself, as long as there is no async code running, you don't need a try..catch. I'm going to always use this pattern in validation middleware going forward, even if the actual route-handler has to use try..catch logic.
