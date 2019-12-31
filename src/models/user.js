@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const secret = 'dq6h/K_NT5@6N`CcJa$<db/W)/awTc';
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -18,7 +21,7 @@ userSchema.statics.create = async function(newUser) {
 };
 
 userSchema.methods.generateAuthToken = function() {
-  this.authToken = 'fakeAuthToken';
+  this.authToken = jwt.sign({ _id: this._id }, secret);
   this.authTokens.push(this.authToken);
 };
 
