@@ -202,3 +202,7 @@ To create a task, send a JSON object in the request body with the format:
 Users require a `username`, `password`, and `email` while tasks require a `description`.
 
 A request to create a resource should have the header `Content-Type: application/json` or it will be rejected.
+
+## Uploading An Avatar
+
+Users can upload an avatar at the route `POST /user/avatar`. The avatar should be an image file, it will be resized to 150/150px and converted to a png on submission. It can be accessed from the route `GET /user/:id/avatar`.
