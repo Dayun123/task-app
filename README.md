@@ -95,7 +95,7 @@ Accepts requests at the following routes:
 |  Method | Path             | Description   |
 | --------| -----------------| --------------|
 | POST    | /user/avatar     | Upload avatar |
-| GET     | /user/avatar | Return avatar |
+| GET     | /user/avatar     | Return avatar |
 
 #### Login/Logout Routes
 
