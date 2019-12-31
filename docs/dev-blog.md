@@ -126,3 +126,9 @@ This way, hopefully, my route-handlers will just deal with calling resource-rela
 #### User Validations
 
 I'm finding that validations are a pain, but neccessary. There is so much to test for, it takes up a lot of development time. It does make me think harder about the User model, and about the incoming requests, which is nice. I'm finding that I can't rely on letting validators run at the user.save() call, but instead have to run them manually with user.validate(). This is because I'm using properties of the user instance before saving the user, so I need to be sure that they are valid.
+
+## 12-31-2019
+
+#### Config Files
+
+When using JWT, in order to sign and verify the tokens you have to provide a secret. I've been just using the string 'secret' for simplicity, as I'm not focusing on security issues just yet, but it seemed easy enough to add an extra level of security by using a long, random string. Today, I had to use the secret in another file (auth.js), so I decided to create a config.json file to store the secret, then have a helper function loadConfig.js that will pull in the config file to expose the secret within the app. Once I get around to creating the install script for the app, I will include the generation of a secret and the config.json file in that script as part of the inintial app setup. Eventually, I will be using environment variables for this stuff, but I haven't learned that yet. The best I can do right now is add the config.json to the .gitignore so that it doesn't get committed to version control.
