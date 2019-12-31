@@ -132,7 +132,7 @@ Get the second page of incompleted tasks for a user (assuming there are more tha
 
 ### Success
 
-Successful responses return a single resource, an array of resources, or a JSON object with `statusCode`, `statusMessage`, and `user` properties (`user` is used for example, `task` is also valid).
+Successful responses return a single resource, an array of resources, or a `msg`, and `user` properties (`user` is used for example, `task` is also valid).
 
 A request to `GET /user` would return:
 
@@ -156,14 +156,13 @@ While a successful request to `POST /user` would return:
 
 ### Failure
 
-Unsuccessful responses return a JSON object with `statusCode` and `statusMessage` properties detailing what went wrong. The `statusMessage` property will be more descriptive than it should be in a real-world app, but this is just so I can practice handling errors and throwing good log messages. Eventually, I would just log a more descriptive message to a file and send a generic message to the client, but I don't want to hook up logging.
+Unsuccessful responses return a JSON object with and `msg` property detailing what went wrong. The `msg` property will be more descriptive than it should be in a real-world app, but this is just so I can practice handling errors and throwing good log messages. Eventually, I would just log a more descriptive message to a file and send a generic message to the client, but I don't want to hook up logging.
 
 Here is an example response for an authentication error:
 
 ```json
 {
-  "statusCode": 401,
-  "statusMessage": "Must provide a valid JWT"
+  "msg": "Must provide a valid JWT"
 }
 ```
 
@@ -171,8 +170,7 @@ And here is an example response for a request that doesn't have the correct info
 
 ```json
 {
-  "statusCode": 400,
-  "statusMessage": "A description is required to create a task"
+  "msg": "A description is required to create a task"
 }
 ```
 
