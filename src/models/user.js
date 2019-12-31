@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
-const ResponseError = require('../utils/responseError');
 const loadConfig = require('../utils/loadConfig');
 
 const userSchema = new mongoose.Schema({
@@ -32,14 +31,10 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
-  try {
-    await user.validate();
-    await user.generateAuthToken();
-    user.password = await bcrypt.hash(user.password, 8);
-    await user.save();
-  } catch (e) {
-    throw new ResponseError(400, e.message);    
-  }
+  await user.validate();
+  await user.generateAuthToken();
+  user.password = await bcrypt.hash(user.password, 8);
+  await user.save();
   return user;
 };
 
