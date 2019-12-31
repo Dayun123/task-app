@@ -132,7 +132,7 @@ Get the second page of incompleted tasks for a user (assuming there are more tha
 
 ### Success
 
-Successful responses return a single resource, an array of resources, or a JSON object with `statusCode`, `statusMessage`, and `user` properties (`user` is used for example, `task` is also valid)
+Successful responses return a single resource, an array of resources, or a JSON object with `statusCode`, `statusMessage`, and `user` properties (`user` is used for example, `task` is also valid).
 
 A request to `GET /user` would return:
 
@@ -142,13 +142,13 @@ A request to `GET /user` would return:
   "email": "Sarai84@hotmail.com",
   "authTokens" : [
     {
-      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhNTc0MTRkYzMzNTE5OTkxOTc4ZGYiLCJpYXQiOjE1Nzc3MzYwMTJ9.31NS7NSLZHHxKZSv5-HjbdngMVdLkBqtemh3j-8cpzI"
+      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     },
     {
-      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhNTc0MTRkYzMzNTE5OTkxOTc4ZGYiLCJpYXQiOjE1Nzc3MzYwMTN9.nztHqs9D68jHcmIHHMfNs37hwhmcaFz_GpHNyrb0pck"
+      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     }
   ],
-  "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhNTc0MTRkYzMzNTE5OTkxOTc4ZGYiLCJpYXQiOjE1Nzc3MzYwMTN9.nztHqs9D68jHcmIHHMfNs37hwhmcaFz_GpHNyrb0pck"
+  "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
@@ -161,7 +161,7 @@ While a successful request to `POST /user` would return:
   "user": {
     "username": "Marion24",
     "email": "Sarai84@hotmail.com",
-    "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhNTc0MTRkYzMzNTE5OTkxOTc4ZGYiLCJpYXQiOjE1Nzc3MzYwMTN9.nztHqs9D68jHcmIHHMfNs37hwhmcaFz_GpHNyrb0pck"
+    "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
   }
 }
 ```
