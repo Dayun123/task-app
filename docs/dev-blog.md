@@ -122,3 +122,7 @@ router.use((err, req, res, next) => {
 ```
 
 This way, hopefully, my route-handlers will just deal with calling resource-related methods and sending the success responses, and error-responses can be thrown to the catch-all error handler middleware.
+
+#### User Validations
+
+I'm finding that validations are a pain, but neccessary. There is so much to test for, it takes up a lot of development time. It does make me think harder about the User model, and about the incoming requests, which is nice. I'm finding that I can't rely on letting validators run at the user.save() call, but instead have to run them manually with user.validate(). This is because I'm using properties of the user instance before saving the user, so I need to be sure that they are valid.
