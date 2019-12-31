@@ -156,7 +156,6 @@ While a successful request to `POST /user` would return:
 
 ```json
 {
-  "_id": "5e0ad49a722b065c80a74eb8",
   "username": "pqyuk_username",
   "email": "jyceau@gmail.com",
   "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhZDQ5YTcyMmIwNjVjODBhNzRlYjgiLCJpYXQiOjE1Nzc3NjgwOTB9.uaMh8rgALvQnM4gC9qYvSNwMy-goqXM06a5HyE9Ap8c"
