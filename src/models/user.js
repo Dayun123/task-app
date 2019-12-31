@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.create = async function(newUser) {
   const user = new this(newUser);
-
+  user.password = await bcrypt.hash(user.password, 8);
+  await user.save();
   return user;
 };
 
