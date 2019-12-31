@@ -18,9 +18,4 @@ router.get('/', auth, (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
-router.use((err, req, res, next) => {
-  if (isNaN(err.status)) return res.status(500).json({ msg: err.message });
-  res.status(err.status).json({ msg: err.message });
-});
-
 module.exports = router;

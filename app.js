@@ -14,4 +14,9 @@ app.use(express.json());
 app.use('/user', usersRouter);
 app.use('/tasks', tasksRouter);
 
+app.use((err, req, res, next) => {
+  if (isNaN(err.status)) return res.status(500).json({ msg: err.message });
+  res.status(err.status).json({ msg: err.message });
+});
+
 module.exports = app;
