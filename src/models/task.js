@@ -12,4 +12,11 @@ const taskSchema = new mongoose.Schema({
   },
 });
 
+taskSchema.statics.create = async function(newTask, owner) {
+  const task = new this(newTask);
+  task.owner = owner._id;
+  await task.save();
+  return task;
+};
+
 module.exports = mongoose.model('Task', taskSchema);
