@@ -12,7 +12,7 @@ I'm working through the following concepts in this project:
 - User authentication
 - Modeling data with Mongoose
 - Basic search functionality
-- Handling file uploads q
+- Handling file uploads
 - Testing routes with Postman
 - Error handling
 
