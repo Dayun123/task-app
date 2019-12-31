@@ -140,14 +140,6 @@ A request to `GET /user` would return:
 {
   "username": "Marion24",
   "email": "Sarai84@hotmail.com",
-  "authTokens" : [
-    {
-      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-    },
-    {
-      "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-    }
-  ],
   "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
