@@ -80,3 +80,45 @@ router.post('/', async (req, res, next) => {
 ```
 
 I like this pattern a lot. Of course, once error-handling is added, the code becomes a little muddier, but the basic separation of concerns, where the User model or class handles all User-related activities, and the route-handler simply deals with returning responses, is a nice one I think.
+
+#### Possible Error-Handling Solution
+
+I think I may have a solution for how to handle errors. I created a simple constructor function `ResponseError`:
+
+```javascript
+
+module.exports = function(status, message) {
+  this.status = status;
+  this.message = message;
+  return this;
+};
+
+```
+
+And then in any middleware, route-handlers, or mongoose models I can simply throw an instance of the `ResponseError` (as done here in validateContentType middleware):
+
+```javascript
+
+const ResponseError = require('../utils/responseError');
+
+module.exports = (req, res, next) => {
+  if (req.get('Content-Type') !== 'application/json') {
+    throw new ResponseError(415, 'To create a user, the request body must have the `Content-Type: application/json` header');
+  }
+  next();
+};
+
+```
+
+Then, I can have a router-level error-handling middelware as a catch-all to sniff the error object for a status, and determine which status and messsage to send:
+
+```javascript
+
+router.use((err, req, res, next) => {
+  if (isNaN(err.status)) return res.status(500).json(err.message);
+  res.status(err.status).json({ msg: err.message });
+});
+
+```
+
+This way, hopefully, my route-handlers will just deal with calling resource-related methods and sending the success responses, and error-responses can be thrown to the catch-all error handler middleware.
