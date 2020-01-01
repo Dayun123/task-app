@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   },
   authToken: String,
   authTokens: [String],
+  avatar: Buffer,
 });
 
 userSchema.statics.create = async function(newUser) {
