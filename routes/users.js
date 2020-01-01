@@ -32,11 +32,4 @@ router.post('/avatar', upload.single('avatar'), processAvatar, (req, res, next) 
   res.status(201).json(res.locals.user.profileAvatar);
 });
 
-router.use((err, req, res, next) => {
-  if (err.message.includes('too large')) {
-    return res.status(413).json({ msg: err.message });
-  }
-  next(e);
-});
-
 module.exports = router;
