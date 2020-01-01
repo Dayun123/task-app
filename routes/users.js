@@ -32,4 +32,9 @@ router.post('/avatar', upload.single('avatar'), processAvatar, (req, res, next) 
   res.status(201).json(res.locals.user.profileAvatar);
 });
 
+router.get('/avatar', (req, res, next) => {
+  res.set('Content-Type', 'image/png');
+  res.status(200).send(res.locals.user.profileAvatar.avatar);
+});
+
 module.exports = router;
