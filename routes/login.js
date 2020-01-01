@@ -20,6 +20,7 @@ router.post('/logout', auth, async (req, res, next) => {
 });
 
 router.post('/logoutAll', auth, async (req, res, next) => {
+  await res.locals.user.removeAllAuthTokens();
   res.status(200).json(res.locals.user.profile);
 });
 
