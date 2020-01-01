@@ -249,3 +249,9 @@ module.exports = (req, res, next) => {
 ```
 
 It's probably not fullproof, but I have a few tests setup in Postman and they all pass so that's good enough for this project app. I'm getting testing/error-handling fatigue pretty bad on this project, as stated already.
+
+## 1-1-2020
+
+#### User Profile
+
+I started work on the avatar upload route today, and realized that the pattern used in the Mead course seems like it may be faulty in some ways. In the course, we saved the avatar as a Buffer directly on the User object. I like this idea, but where the problem arises is how to return a User profile with that avatar only when neccessary. Originally, I just added the avatar to the virtual 'profile' of the user, but then realized that I would be sending the binary data buffer along with every request for a user, which would be bad. Now, I'm just going to create a different virtual property 'profileAvatar' that has the avatar added in with the regular virtual profile and return this user profile at both avatar routes.
