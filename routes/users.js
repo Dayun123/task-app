@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads' });
 const User = require('../src/models/user');
 const validateContentType = require('../src/middleware/validateContentType');
 const auth = require('../src/middleware/auth');
@@ -21,7 +23,7 @@ router.get('/', (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
-router.post('/avatar', (req, res, next) => {
+router.post('/avatar', upload.single('avatar'), (req, res, next) => {
   res.status(201).json(res.locals.user.profile);
 });
 
