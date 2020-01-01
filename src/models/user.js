@@ -39,7 +39,10 @@ userSchema.statics.create = async function(newUser) {
 };
 
 userSchema.statics.auth = async function(userToAuth) {
-  const user = await this.findOne({ email: userToAuth.email });
+  const queryFilter = {};
+  if (userToAuth.email) queryFilter.email = userToAuth.email;
+  if (userToAuth.username) queryFilter.username = userToAuth.username;
+  const user = await this.findOne(queryFilter);
   return user;
 };
 
