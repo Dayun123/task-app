@@ -38,6 +38,11 @@ userSchema.statics.create = async function(newUser) {
   return user;
 };
 
+userSchema.statics.auth = async function(userToAuth) {
+  const user = await this.findOne({ email: userToAuth.email });
+  return user;
+};
+
 userSchema.methods.generateAuthToken = async function() {
   const config = await loadConfig();
   this.authToken = jwt.sign({ _id: this._id }, config.secret);
