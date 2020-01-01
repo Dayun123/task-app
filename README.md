@@ -144,13 +144,13 @@ A request to `GET /user` would return:
 }
 ```
 
-While a successful request to `POST /user` would return:
+While a successful request to `POST /task` would return:
 
 ```json
 {
-  "username": "pqyuk_username",
-  "email": "jyceau@gmail.com",
-  "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTBhZDQ5YTcyMmIwNjVjODBhNzRlYjgiLCJpYXQiOjE1Nzc3NjgwOTB9.uaMh8rgALvQnM4gC9qYvSNwMy-goqXM06a5HyE9Ap8c"
+    "_id": "5e0ca9d69ae43b5a9019f456",
+    "description": "Take out trash",
+    "completed": false
 }
 ```
 
