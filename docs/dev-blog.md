@@ -207,3 +207,45 @@ That whole workflow makes logical sense to me. I'm thinking of it as route-based
 #### Laziness
 
 I'm already starting to get lazy and sloppy with the testing for this app. I really like testing, but the idea of setting up the testing to work with a stock app on install is not appealing right now. I wanted to create a robust Postman test suite like I did for a previous app, one that would work on any machine. Now I'm seeing that the work involved in doing that may not be worth it at this point, as I need to be focused on finishing this app and moving on to some React next.
+
+#### GET /tasks
+
+I kind of like how I setup this route-handler:
+
+```javascript
+
+router.get('/', parseQuery, async (req, res, next) => {
+  const tasks = await Task.find(req.filter, 'description completed _id').skip(req.skip).limit(req.numResults);
+  res.status(200).json(tasks);
+});
+
+```
+
+There is a lot going on, but it handles a lot of functionality in essentially one call to `Task.find`. Using the `.skip()` and `.limit()` methods of the `Query` object, I can parse the req.query with the `parseQuery` middleware and perform some neat filtering. I also moved the query filter into `parseQuery` and stored it on the `req.filter` object. Since an array is returned, I couldn't call `task.profile` on the returned tasks, but the second param to `Task.find` is a list of the fields you want returned in the results, so that takes care of only returning private fields.
+
+Here is the parseQuery middleware:
+
+```javascript
+
+module.exports = (req, res, next) => {
+  
+  req.filter = {};
+
+  req.filter.owner = res.locals.user._id;
+  
+  if (req.query.completed === 'true' || req.query.completed === 'false') {
+    req.filter.completed = req.query.completed === 'true';
+  }
+
+  req.numResults = +req.query.numResults || undefined;
+
+  if (+req.query.page > 1) {
+    req.skip = (+req.query.page - 1) * req.numResults;
+  }
+
+  next();
+};
+
+```
+
+It's probably not fullproof, but I have a few tests setup in Postman and they all pass so that's good enough for this project app. I'm getting testing/error-handling fatigue pretty bad on this project, as stated already.
