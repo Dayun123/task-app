@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
     const _id = jwt.verify(token, config.secret)._id;
     const user = await User.findById(_id);
     if (!user) throw new ResponseError(404, 'User not found');
+    if (!user.authTokens.includes(token)) throw new ResponseError(401, 'Invalid JWT')
     res.locals.user = user;
     next();
   } catch (e) {
