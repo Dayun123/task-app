@@ -17,8 +17,8 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
-  const tasks = await Task.find({ owner: res.locals.user._id }, 'description completed _id').limit(+req.query.numResults);
+router.get('/', parseQuery, async (req, res, next) => {
+  const tasks = await Task.find({ owner: res.locals.user._id }, 'description completed _id').skip(req.skip).limit(req.numResults);
   res.status(200).json(tasks);
 });
 
