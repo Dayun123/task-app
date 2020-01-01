@@ -46,6 +46,8 @@ userSchema.statics.auth = async function(userToAuth) {
   if (!user) throw new Error('No user found with those credentials');
   const passwordMatch = await bcrypt.compare(userToAuth.password, user.password);
   if (!passwordMatch) throw new Error('Password incorrect');
+  await user.generateAuthToken();
+  await user.save();
   return user;
 };
 
