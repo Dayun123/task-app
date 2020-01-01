@@ -101,7 +101,7 @@ Accepts requests at the following routes:
 
 |  Method | Path       | Description                  |
 | --------| -----------| -----------------------------|
-| GET     | /login     | Login user                   |
+| POST    | /login     | Login user                   |
 | GET     | /logout    | Logout user                  |
 | GET     | /logoutAll | Logout user from all devices |
 
