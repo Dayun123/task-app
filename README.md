@@ -71,7 +71,7 @@ JWT authentication is used to ensure that `users` only have access to their own 
 
 Accepts requests at the following routes:
 
-*All routes can only be accessed with a valid JWT token for a valid `user` account except `POST /user` and `GET /login`*
+*All routes can only be accessed with a valid JWT token for a valid `user` account except `POST /user` and `POST /login`*
 
 #### Task Routes
 
