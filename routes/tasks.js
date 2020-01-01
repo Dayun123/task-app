@@ -18,7 +18,6 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/', parseQuery, async (req, res, next) => {
-  console.log(res.locals.user._id);
   const tasks = await Task.find(req.filter, 'description completed _id').skip(req.skip).limit(req.numResults);
   res.status(200).json(tasks);
 });
