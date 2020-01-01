@@ -12,9 +12,9 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 
+app.use('/', loginRouter);
 app.use('/user', usersRouter);
 app.use('/tasks', tasksRouter);
-app.use('/login', loginRouter);
 
 app.use((err, req, res, next) => {
   if (isNaN(err.status)) return res.status(500).json({ msg: err.message });
