@@ -1,6 +1,7 @@
 const express = require('express');
 const Task = require('../src/models/task');
 const auth = require('../src/middleware/auth');
+const parseQuery = require('../src/middleware/parseQuery');
 const ResponseError = require('../src/utils/responseError');
 
 const router = express.Router();
@@ -17,7 +18,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-  const tasks = await Task.find({ owner: res.locals.user._id }, 'description completed _id');
+  const tasks = await Task.find({ owner: res.locals.user._id }, 'description completed _id').limit(+req.query.numResults);
   res.status(200).json(tasks);
 });
 
