@@ -22,4 +22,10 @@ router.get('/', parseQuery, async (req, res, next) => {
   res.status(200).json(tasks);
 });
 
+router.get('/:id', async (req, res, next) => {
+  const task = await Task.findById(req.params.id);
+  if (!task) next(new ResponseError(400, 'Task not found'));
+  res.status(200).json(task.profile);
+});
+
 module.exports = router;
