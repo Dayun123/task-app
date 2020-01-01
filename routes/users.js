@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads' });
+const upload = multer();
 const User = require('../src/models/user');
 const validateContentType = require('../src/middleware/validateContentType');
 const auth = require('../src/middleware/auth');
@@ -24,6 +24,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/avatar', upload.single('avatar'), (req, res, next) => {
+  console.log(req.file);
+  res.locals.user.avatar = req.file.buffer;
   res.status(201).json(res.locals.user.profile);
 });
 
