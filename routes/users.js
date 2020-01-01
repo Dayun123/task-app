@@ -15,12 +15,14 @@ router.post('/', validateContentType, async (req, res, next) => {
   }
 });
 
-router.get('/', auth, (req, res, next) => {
+router.use(auth);
+
+router.get('/', (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
 router.post('/avatar', (req, res, next) => {
-  res.status(201).send();
+  res.status(201).json(res.locals.user.profile);
 });
 
 module.exports = router;
