@@ -75,6 +75,14 @@ userSchema.virtual('profile').get(function() {
     username: this.username,
     email: this.email,
     authToken: this.authToken,
+  };
+});
+
+userSchema.virtual('profileAvatar').get(function() {
+  return {
+    username: this.username,
+    email: this.email,
+    authToken: this.authToken,
     avatar: this.avatar,
   };
 });

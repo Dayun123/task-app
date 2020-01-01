@@ -27,7 +27,7 @@ router.post('/avatar', upload.single('avatar'), async (req, res, next) => {
   console.log(req.file);
   res.locals.user.avatar = req.file.buffer;
   await res.locals.user.save();
-  res.status(201).json(res.locals.user.profile);
+  res.status(201).json(res.locals.user.profileAvatar);
 });
 
 module.exports = router;
