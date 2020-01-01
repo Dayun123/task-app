@@ -7,11 +7,11 @@ module.exports = async (req, res, next) => {
   try {
     const config = await loadConfig();
     if (!req.get('Authorization')) throw new ResponseError(401, 'Must include a JWT in an Authorization header');
-    const token = req.get('Authorization').replace('Bearer ', '');
-    const _id = jwt.verify(token, config.secret)._id;
+    req.token = req.get('Authorization').replace('Bearer ', '');
+    const _id = jwt.verify(req.token, config.secret)._id;
     const user = await User.findById(_id);
     if (!user) throw new ResponseError(404, 'User not found');
-    if (!user.authTokens.includes(token)) throw new ResponseError(401, 'Invalid JWT')
+    if (!user.authTokens.includes(req.token)) throw new ResponseError(401, 'Invalid JWT')
     res.locals.user = user;
     next();
   } catch (e) {
