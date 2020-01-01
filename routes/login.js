@@ -15,7 +15,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.post('/logout', auth, async (req, res, next) => {
-  // await res.locals.user.removeAuthToken();
+  await res.locals.user.removeAuthToken(req.token);
   res.status(200).json(res.locals.user.profile);
 });
 

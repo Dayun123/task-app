@@ -57,6 +57,12 @@ userSchema.methods.generateAuthToken = async function() {
   this.authTokens.push(this.authToken);
 };
 
+userSchema.methods.removeAuthToken = async function(token) {
+  this.authToken = undefined;
+  this.authTokens = this.authTokens.filter((authToken) => authToken !== token);
+  await this.save();
+};
+
 userSchema.virtual('profile').get(function() {
   return {
     username: this.username,
