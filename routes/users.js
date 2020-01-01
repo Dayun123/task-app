@@ -23,9 +23,10 @@ router.get('/', (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
-router.post('/avatar', upload.single('avatar'), (req, res, next) => {
+router.post('/avatar', upload.single('avatar'), async (req, res, next) => {
   console.log(req.file);
   res.locals.user.avatar = req.file.buffer;
+  await res.locals.user.save();
   res.status(201).json(res.locals.user.profile);
 });
 
