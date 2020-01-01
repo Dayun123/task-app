@@ -43,6 +43,8 @@ userSchema.statics.auth = async function(userToAuth) {
   if (userToAuth.email) queryFilter.email = userToAuth.email;
   if (userToAuth.username) queryFilter.username = userToAuth.username;
   const user = await this.findOne(queryFilter);
+  const passwordMatch = await bcrypt.compare(userToAuth.password, user.password);
+  if (!passwordMatch) throw new Error('Password incorrect');
   return user;
 };
 
