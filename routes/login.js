@@ -19,4 +19,8 @@ router.post('/logout', auth, async (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
+router.post('/logoutAll', auth, async (req, res, next) => {
+  res.status(200).json(res.locals.user.profile);
+});
+
 module.exports = router;
