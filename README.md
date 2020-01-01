@@ -24,6 +24,8 @@ In addition to the dev blog, I have a document that will track my TODO's for the
 
 As I'm trying to understand the Express framework and Node.js at a very basic level, I will *NOT* have any client-side code, this project will just provide the backend for a task app. Because of this, some routes (login/logout especially) will perform only a portion of the tasks they would normally perform in a full app. For example, on successful login, I will merely be adding an auth token to the user and returning the user's profile to the client, but no redirection will take place.
 
+I'm using JWT authentication, but not creating an expiration for the token. This is probably not a best-practice, but it makes it easier to test the routes and this app is not meant to be perfect, just a test run of some concepts I'm learning. I'm aware that JWT's should have an exp in a production ready app!
+
 I'm also not creating a production environment for this app, everything will be setup for development only as this project is not going to be deployed.
 
 ## Installation
