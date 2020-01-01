@@ -19,4 +19,8 @@ router.get('/', auth, (req, res, next) => {
   res.status(200).json(res.locals.user.profile);
 });
 
+router.post('/avatar', (req, res, next) => {
+  res.status(201).send();
+});
+
 module.exports = router;
