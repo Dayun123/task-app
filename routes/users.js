@@ -1,6 +1,10 @@
 const express = require('express');
 const multer = require('multer');
-const upload = multer();
+const upload = multer({ 
+  limits: {
+    fileSize: 10_000_000,
+  },
+});
 const User = require('../src/models/user');
 const validateContentType = require('../src/middleware/validateContentType');
 const auth = require('../src/middleware/auth');
@@ -25,8 +29,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/avatar', upload.single('avatar'), processAvatar, (req, res, next) => {
-
   res.status(201).json(res.locals.user.profileAvatar);
+});
+
+router.use((err, req, res, next) => {
+  if (err.message.includes('too large')) {
+    return res.status(413).json({ msg: err.message });
+  }
+  next(e);
 });
 
 module.exports = router;
