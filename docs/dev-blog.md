@@ -203,3 +203,7 @@ I'm still refining how I approach developing a web app, but here is my current w
   8. Setup error-handling to response correctly for each invalid request
 
 That whole workflow makes logical sense to me. I'm thinking of it as route-based development workflow. When I was working yesterday, starting from a clean app, I began with the POST /user route, to create a user. Once I got the Postman request hooked up and the express route-handler returning a dummy response, I had a bunch of work to do hooking up the database, creating a Mongoose Schema and Model for a User, deciding on how to struture error-handling, etc... So what begins with a simple desire to fill out a route can bounce around through many different paths to get the task completed, but at the end, what has been accomplished is simply implemting the route. I imagine I will keep this workflow even once the front-end is hooked up, it will just fit in wherever it goes logically in the process.
+
+#### Laziness
+
+I'm already starting to get lazy and sloppy with the testing for this app. I really like testing, but the idea of setting up the testing to work with a stock app on install is not appealing right now. I wanted to create a robust Postman test suite like I did for a previous app, one that would work on any machine. Now I'm seeing that the work involved in doing that may not be worth it at this point, as I need to be focused on finishing this app and moving on to some React next.
